@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evo-RL | Iterative Robot Policy Improvement</title>
+  <meta name="description" content="Evo-RL: Iterative Robot Policy Improvement via Staged Closed-Loop Learning. Demonstrations, human corrections, and autonomous experience, with the RW-RL dataset.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0c4148">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230c4148'/%3E%3Cpath d='M23 10H10v12h13M10 16h10' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="content.js" defer></script>
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Evo-RL home">Evo<span>-RL</span><span class="wordmark-dot" aria-hidden="true">.</span></a>
+    <nav aria-label="Page sections"><a href="#abstract">Abstract</a><a href="#dataset">Dataset</a><a href="#framework">Framework</a><a href="#experiments">Experiments</a><a href="#results">Results</a></nav>
+    <span class="draft-badge">Project draft</span>
+  </header>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="paper-title">
+      <p class="eyebrow">REAL-WORLD ROBOT LEARNING</p>
+      <h1 id="paper-title"><span class="hero-brand">Evo-RL</span><span class="hero-title">Iterative Robot Policy Improvement<br class="desktop-break"> via Staged Closed-Loop Learning</span></h1>
+      <p class="hero-summary">Learn from demonstrations. Recover with human guidance.<br class="desktop-break"> Improve through autonomous experience.</p>
+      <div class="author-block"><p>Anonymous Authors</p><span class="pending-inline" lang="zh-CN">待补充：作者姓名、顺序、单位及个人主页</span></div>
+      <div class="resource-links" aria-label="Project resources">
+        <button class="resource-button" data-resource="paper" type="button" disabled>Paper <span>Coming soon</span></button>
+        <a class="resource-button" href="#videos">Video <span>To be added</span></a>
+        <button class="resource-button" data-resource="code" type="button" disabled>Code <span>Coming soon</span></button>
+        <button class="resource-button" data-resource="dataset" type="button" disabled>Dataset <span>Coming soon</span></button>
+        <button class="resource-button" data-resource="models" type="button" disabled>Models <span>Coming soon</span></button>
+      </div>
+      <p class="resource-note" lang="zh-CN">待补充：论文 / arXiv、代码仓库、数据集和模型权重的正式链接</p>
+    </section>
+    <div class="page-width">
+      <figure class="teaser">
+        <a href="assets/rwrl_overview.png" target="_blank" rel="noopener" aria-label="Open RW-RL overview at full resolution"><img src="assets/rwrl_overview.png" width="1967" height="800" alt="RW-RL dataset overview showing four robot embodiments, real-world interactions, multimodal records, and hierarchical annotations" fetchpriority="high"></a>
+        <figcaption><strong>TL;DR</strong> Evo-RL brings demonstrations, targeted human corrections, and selected autonomous experience into one iterative learning loop. RW-RL organizes the data that makes this loop possible.</figcaption>
+      </figure>
+    </div>
+    <section class="section abstract-section" id="abstract">
+      <div class="reading-width"><p class="eyebrow">THE IDEA</p><h2>From task competence<br>to better execution.</h2>
+      <p>Learning effective real-robot policies involves both acquiring basic task competence and improving execution efficiency. Evo-RL organizes these objectives into a staged data loop: teleoperated demonstrations initialize a vision-language-action policy, human interventions provide corrections in unfamiliar states, and selected autonomous experience supports further policy refinement.</p>
+      <p>A value model assesses experience to guide the selection of promising behavior for policy fine-tuning. The current study examines precision insertion, deformable manipulation, and multi-object packing. Alongside this workflow, RW-RL brings demonstrations, human-intervention episodes, and autonomous rollouts into a unified dataset with synchronized trajectories, controller provenance, and hierarchical semantic annotations.</p>
+      <p class="editor-note" lang="zh-CN">内容依据当前论文草稿整理；未完成的实验和发布信息均保留占位。</p></div>
+    </section>
+
+    <section class="section" id="dataset">
+      <div class="page-width">
+        <div class="section-heading"><div><p class="eyebrow">THE DATA BEHIND THE LOOP</p><h2>RW-RL Dataset</h2></div><span class="section-index" aria-hidden="true">01 / DATA</span></div>
+        <p class="section-intro">Real-world experience, with the context needed to learn from it. RW-RL unifies teleoperated demonstrations, human-intervention episodes, and autonomous rollouts across different robot platforms.</p>
+        <dl class="dataset-stats"><div><dt>Real-world interaction</dt><dd>1,000<span>+ hours</span></dd></div><div><dt>Robot embodiments</dt><dd>4</dd></div><div><dt>Scene domains</dt><dd>9</dd></div><div><dt>Task templates</dt><dd>30<span>+</span></dd></div></dl>
+        <p class="subtle-caption">Dataset scale as described in the current manuscript. Public access links are pending.</p>
+        <div class="embodiment-list" aria-label="Robot embodiments"><span>AgiBot G2</span><span>Galaxea R1Lite</span><span>AgileX PiperX</span><span>SO-101</span></div>
+        <div class="annotation-grid"><article><span class="small-number">01</span><h3>Dataset context</h3><p>Task, embodiment, difficulty, objects, and coordination or precision requirements.</p></article><article><span class="small-number">02</span><h3>Episode semantics</h3><p>Instructions, scenes, outcomes, execution quality, and mistakes.</p></article><article><span class="small-number">03</span><h3>Frame-aligned labels</h3><p>Subtasks, key stages, controller identity, intervention boundaries, and policy checkpoints.</p></article></div>
+        <figure class="paper-figure"><a href="assets/data_characterization.png" target="_blank" rel="noopener" aria-label="Open semantic annotation statistics at full resolution"><img src="assets/data_characterization.png" width="1672" height="844" loading="lazy" alt="Semantic annotation statistics across five tasks, showing dataset scale, episode and segment labels, and annotation density and duration"></a><figcaption>Semantic annotation statistics across five tasks. This annotated subset should not be confused with the full RW-RL dataset. <span class="zoom-hint">Select the figure to view full resolution.</span></figcaption></figure>
+        <div class="inline-placeholder" lang="zh-CN"><span class="pending-label">待补充</span><p>数据集下载地址、数据说明 / 数据卡、许可协议及各平台的数据规模明细。</p></div>
+      </div>
+    </section>
+    <section class="section soft-section" id="framework">
+      <div class="page-width">
+        <div class="section-heading"><div><p class="eyebrow">THE LEARNING LOOP</p><h2>Demonstrate. Correct. Refine.</h2></div><span class="section-index" aria-hidden="true">02 / METHOD</span></div>
+        <p class="section-intro">Evo-RL integrates imitation learning and value-guided refinement into a staged workflow. Each policy update continues from the previous checkpoint.</p>
+        <ol class="learning-stages"><li><span class="stage-number">1</span><h3>Demonstration initialization</h3><p>Fine-tune a pretrained π<sub>0.5</sub> VLA policy on teleoperated demonstrations to establish basic task competence.</p></li><li><span class="stage-number">2</span><h3>Human-guided recovery</h3><p>Collect corrections in states the policy struggles with. Mix demonstrations with human-controlled segments from successful intervention episodes.</p></li><li><span class="stage-number">3</span><h3>Value-guided refinement</h3><p>Use a learned value model to select promising segments. Incorporate successful autonomous rollouts in later rounds to improve execution.</p></li></ol>
+        <figure class="paper-figure framework-figure"><a href="assets/evo_rl_method.png" target="_blank" rel="noopener" aria-label="Open Evo-RL learning framework at full resolution"><img src="assets/evo_rl_method.png" width="5200" height="2927" loading="lazy" alt="Evo-RL framework: demonstration initialization, mixed-control experience collection, value learning from trajectories, and advantage-guided policy fine-tuning"></a><figcaption>Complete episodes support value learning; human-controlled correction segments provide policy supervision. Autonomous experience is introduced in later rounds. <span class="zoom-hint">Select the figure to view full resolution.</span></figcaption></figure>
+        <details class="technical-details"><summary>How experience is used</summary><div class="details-body"><p>The policy takes camera images, robot proprioception, and a task instruction as input, and generates action chunks. The current experimental setup uses a separate, task-specific, vision-only value model.</p><p>The frame-level objective penalizes elapsed execution time and human takeovers. Estimated advantages give selected behavior additional weight in the policy training mixture. Human corrections remain supervised training data.</p><p class="editor-note" lang="zh-CN">待统一：论文 Method 写每类数据 top 30%，实验部分写正优势的全局 top 10%（50-action 估值、20-action 保留段）。此处暂不填写最终采样比例；方法图也需与最终实现对齐。</p></div></details>
+      </div>
+    </section>
+    <section class="section" id="experiments">
+      <div class="page-width">
+        <div class="section-heading"><div><p class="eyebrow">ON REAL ROBOTS</p><h2>Three tasks. Different challenges.</h2></div><span class="section-index" aria-hidden="true">03 / EXPERIMENTS</span></div>
+        <p class="section-intro">We study precision insertion on PiperX, garment folding on SO-101, and multi-object packing on SO-101. Each platform uses two arms, an external RGB camera, and two wrist cameras.</p>
+        <figure class="paper-figure"><a href="assets/task_progression.png" target="_blank" rel="noopener" aria-label="Open task progression figure at full resolution"><img src="assets/task_progression.png" width="3200" height="1432" loading="lazy" alt="Chronological task frames: bolt and sleeve insertion, garment folding and transfer to a stack, and packing stationery into a pencil case"></a><figcaption>Representative sequences from the manuscript. Rows show insertion, folding, and packing; these are still images, not demonstration videos.</figcaption></figure>
+        <div id="videos" class="video-section">
+          <div class="subsection-heading"><h3>Real-world demonstrations</h3><span class="pending-inline">Videos to be added</span></div>
+          <div class="task-grid">
+            <article class="task"><div class="video-placeholder" data-video="insertion"><span class="placeholder-icon" aria-hidden="true">＋</span><strong>Insertion video</strong><span lang="zh-CN">待补充：PiperX 插入任务视频</span></div><p class="task-platform">PIPERX · PRECISION</p><h3>Precision insertion</h3><p>Grasp, align, and insert five screw–sleeve pairs, with either arm able to perform the insertion.</p><p class="fill-note" lang="zh-CN">展示抓取、对齐和插入全过程；标注播放倍速及策略版本。</p></article>
+            <article class="task"><div class="video-placeholder" data-video="folding"><span class="placeholder-icon" aria-hidden="true">＋</span><strong>Folding video</strong><span lang="zh-CN">待补充：SO-101 叠衣任务视频</span></div><p class="task-platform">SO-101 · DEFORMABLE</p><h3>Garment folding</h3><p>Retrieve and spread a T-shirt, fold it in half, fold the sleeves, then fold the hem toward the collar.</p><p class="fill-note" lang="zh-CN">展示五个评估阶段；如发生人工复位，请明确标注。</p></article>
+            <article class="task"><div class="video-placeholder" data-video="packing"><span class="placeholder-icon" aria-hidden="true">＋</span><strong>Packing video</strong><span lang="zh-CN">待补充：SO-101 收纳任务视频</span></div><p class="task-platform">SO-101 · MULTI-OBJECT</p><h3>Pencil-case packing</h3><p>Collect stationery from the tabletop and place it in a pencil case, with human corrections when needed.</p><p class="fill-note" lang="zh-CN">展示自动执行、人工接管与控制权交还，并标注干预区间。</p></article>
+          </div>
+          <div class="overview-video video-placeholder" data-video="overview"><span class="placeholder-icon" aria-hidden="true">＋</span><strong>Project overview video</strong><span lang="zh-CN">待补充：项目总览视频，串联示范初始化 → 人工纠错 → 自主优化 → 实验对比</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="section soft-section" id="results">
+      <div class="page-width">
+        <div class="section-heading"><div><p class="eyebrow">CURRENT MANUSCRIPT RESULTS</p><h2>Measuring policy improvement.</h2></div><span class="section-index" aria-hidden="true">04 / RESULTS</span></div>
+        <p class="section-intro">The current draft compares human-data efficiency and policy improvement across learning stages. Reported values below are transcribed from its experimental tables; missing entries remain blank.</p>
+        <div class="metric-definition"><strong>Read the metrics</strong><p><b>SR</b> is the percentage of successful <em>attempts</em>, aggregated across units U₁–U₅ and trials. It is not whole-task completion rate. <b>TP</b> is completed units per hour of robot execution, including timed-out trials. Each trial has a five-minute limit.</p></div>
+        <div class="result-block"><div class="subsection-heading"><h3>Task performance &amp; ablations</h3><span class="table-label">Manuscript Table III</span></div>
+          <div class="table-scroll" role="region" aria-label="Task performance and ablation results" tabindex="0"><table><caption class="sr-only">Task performance and ablations from the current manuscript. Dashes indicate missing results.</caption><thead><tr><th scope="col">Task</th><th scope="col">Method</th><th scope="col" class="numeric">SR (%) ↑</th><th scope="col" class="numeric">TP (units/h) ↑</th></tr></thead><tbody>
+            <tr><th scope="rowgroup" rowspan="5">PiperX insertion</th><td>SFT</td><td class="numeric">23.81</td><td class="numeric">12.00</td></tr>
+            <tr><td>SFT + Int.</td><td class="numeric">78.72</td><td class="numeric">50.72</td></tr>
+            <tr><td>SFT + RL <span class="row-pending">Pending</span></td><td class="numeric missing" aria-label="Not yet reported">—</td><td class="numeric missing" aria-label="Not yet reported">—</td></tr>
+            <tr class="ours"><td>Evo-RL</td><td class="numeric">88.24</td><td class="numeric">60.61</td></tr>
+            <tr><td>Evo-RL (R2) <span class="row-pending">Pending</span></td><td class="numeric missing" aria-label="Not yet reported">—</td><td class="numeric missing" aria-label="Not yet reported">—</td></tr>
+            <tr class="group-start"><th scope="rowgroup" rowspan="2">SO-101 folding</th><td>SFT</td><td class="numeric">55.56</td><td class="numeric">75.78</td></tr>
+            <tr><td>Evo-RL <span class="row-pending">Pending</span></td><td class="numeric missing" aria-label="Not yet reported">—</td><td class="numeric missing" aria-label="Not yet reported">—</td></tr>
+          </tbody></table></div>
+          <p class="table-note">For insertion, U₁–U₅ are the five screw–sleeve pairs. For folding, they are the five evaluated task stages.</p>
+          <details class="technical-details"><summary>View per-unit results and attempt counts</summary><div class="details-body"><p>Each cell reports successful completions / planned instances (attempts). Dashes indicate results not yet reported.</p><div class="table-scroll" role="region" aria-label="Per-unit task performance" tabindex="0"><table class="compact-table"><thead><tr><th scope="col">Task / Method</th><th scope="col">U₁</th><th scope="col">U₂</th><th scope="col">U₃</th><th scope="col">U₄</th><th scope="col">U₅</th></tr></thead><tbody>
+          <tr><th scope="row">Insertion · SFT</th><td>7/10 (20)</td><td>3/10 (13)</td><td>0/10 (9)</td><td>0/10 (0)</td><td>0/10 (0)</td></tr>
+          <tr><th scope="row">Insertion · SFT + Int.</th><td>9/10 (11)</td><td>9/10 (12)</td><td>8/10 (10)</td><td>6/10 (8)</td><td>5/10 (6)</td></tr>
+          <tr><th scope="row">Insertion · SFT + RL</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr class="ours"><th scope="row">Insertion · Evo-RL</th><td>10/10 (10)</td><td>10/10 (10)</td><td>10/10 (12)</td><td>10/10 (11)</td><td>5/10 (8)</td></tr>
+          <tr><th scope="row">Insertion · Evo-RL (R2)</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><th scope="row">Folding · SFT</th><td>20/20 (20)</td><td>17/20 (76)</td><td>16/20 (18)</td><td>16/20 (21)</td><td>16/20 (18)</td></tr>
+          <tr><th scope="row">Folding · Evo-RL</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          </tbody></table></div></div></details>
+          <p class="fill-note" lang="zh-CN">待补充：PiperX 的 SFT + RL 消融、Evo-RL 第二轮，以及 SO-101 folding 的 Evo-RL 结果（U₁–U₅、SR、TP）。</p>
+        </div>
+        <div class="result-block"><div class="subsection-heading"><h3>Human-data efficiency</h3><span class="table-label">Manuscript Table I</span></div>
+          <p>Budget is total active human-control time across demonstrations and interventions. SFT + Int. allocates one hour of each budget to human-intervention data.</p>
+          <div class="table-scroll" role="region" aria-label="Human-data efficiency results" tabindex="0"><table><caption class="sr-only">PiperX demonstration scaling and intervention effectiveness</caption><thead><tr><th scope="col">Human budget</th><th scope="col">Method</th><th scope="col" class="numeric">SR (%) ↑</th><th scope="col" class="numeric">TP (units/h) ↑</th></tr></thead><tbody>
+            <tr><th scope="rowgroup" rowspan="2">2 hours</th><td>SFT</td><td class="numeric">0.00</td><td class="numeric">0.00</td></tr>
+            <tr class="ours"><td>SFT + Int.</td><td class="numeric">46.15</td><td class="numeric">7.20</td></tr>
+            <tr class="group-start"><th scope="rowgroup" rowspan="2">4 hours</th><td>SFT</td><td class="numeric">27.03</td><td class="numeric">12.00</td></tr>
+            <tr><td>SFT + Int. <span class="row-pending">Pending</span></td><td class="numeric missing" aria-label="Not yet reported">—</td><td class="numeric missing" aria-label="Not yet reported">—</td></tr>
+            <tr class="group-start"><th scope="rowgroup" rowspan="2">8 hours</th><td>SFT</td><td class="numeric">43.68</td><td class="numeric">50.17</td></tr>
+            <tr><td>SFT + Int. <span class="row-pending">Pending</span></td><td class="numeric missing" aria-label="Not yet reported">—</td><td class="numeric missing" aria-label="Not yet reported">—</td></tr>
+            <tr class="group-start"><th scope="row">16 hours</th><td>SFT</td><td class="numeric">78.26</td><td class="numeric">53.27</td></tr>
+          </tbody></table></div>
+          <details class="technical-details"><summary>View per-unit results and training protocol</summary><div class="details-body"><p>SFT uses 2, 4, 8, or 16 hours of demonstrations and trains for 2.5 epochs. The intervention settings use 1, 3, or 7 hours of demonstrations followed by one hour of intervention data, with another 2.5 epochs of fine-tuning on the combined data.</p><div class="table-scroll" role="region" aria-label="Per-unit human-data efficiency results" tabindex="0"><table class="compact-table"><thead><tr><th scope="col">Budget / Method</th><th scope="col">U₁</th><th scope="col">U₂</th><th scope="col">U₃</th><th scope="col">U₄</th><th scope="col">U₅</th></tr></thead><tbody>
+          <tr><th scope="row">2 h · SFT</th><td>0/10 (18)</td><td>0/10 (0)</td><td>0/10 (0)</td><td>0/10 (0)</td><td>0/10 (0)</td></tr>
+          <tr class="ours"><th scope="row">2 h · SFT + Int.</th><td>5/10 (12)</td><td>1/10 (1)</td><td>0/10 (0)</td><td>0/10 (0)</td><td>0/10 (0)</td></tr>
+          <tr><th scope="row">4 h · SFT</th><td>5/10 (23)</td><td>4/10 (7)</td><td>1/10 (7)</td><td>0/10 (0)</td><td>0/10 (0)</td></tr>
+          <tr><th scope="row">4 h · SFT + Int.</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><th scope="row">8 h · SFT</th><td>9/10 (21)</td><td>9/10 (14)</td><td>8/10 (23)</td><td>8/10 (19)</td><td>4/10 (10)</td></tr>
+          <tr><th scope="row">8 h · SFT + Int.</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><th scope="row">16 h · SFT</th><td>9/10 (12)</td><td>8/10 (9)</td><td>8/10 (8)</td><td>6/10 (12)</td><td>5/10 (5)</td></tr>
+          </tbody></table></div></div></details>
+          <p class="fill-note" lang="zh-CN">待补充：4 h 与 8 h 预算下 SFT + Int. 的完整评估数据。</p>
+        </div>
+        <div class="result-block"><div class="subsection-heading"><h3>Dependence on human intervention</h3><span class="table-label">Manuscript Table II</span></div>
+          <p>SO-101 packing is evaluated by how often and how long the human operator intervenes.</p>
+          <div class="table-scroll" role="region" aria-label="SO-101 packing intervention results" tabindex="0"><table><caption class="sr-only">Human intervention in SO-101 packing</caption><thead><tr><th scope="col">Method</th><th scope="col" class="numeric">Interventions / episode ↓</th><th scope="col" class="numeric">Intervention time (%) ↓</th></tr></thead><tbody><tr><th scope="row">SFT</th><td class="numeric">11.40</td><td class="numeric">31.65</td></tr><tr class="ours"><th scope="row">Evo-RL</th><td class="numeric">10.92</td><td class="numeric">23.26</td></tr></tbody></table></div>
+          <p class="table-note">An intervention is a contiguous human-control interval. Intervention time is the percentage of total recorded time under human control.</p>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="citation">
+      <div class="reading-width"><p class="eyebrow">CITE THIS WORK</p><div class="subsection-heading"><h2>BibTeX</h2><button id="copy-citation" class="copy-button" type="button" disabled>Copy · pending</button></div><div class="citation-placeholder" id="citation-content"><p class="pending-label">Citation pending</p><p lang="zh-CN">待补充：正式 BibTeX，包含最终作者列表、年份、论文题目及 arXiv 编号或发表信息。</p></div><p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+      <details class="completion-list" id="completion-list"><summary>Content to complete <span lang="zh-CN">· 待补充清单</span></summary><div class="details-body" lang="zh-CN"><ul><li><strong>作者与发表信息：</strong>作者顺序、单位、主页；会议或期刊信息确认后再添加，不预设接收状态。</li><li><strong>公开资源：</strong>论文 PDF / arXiv、GitHub 仓库、RW-RL 下载链接、模型权重及各自许可。</li><li><strong>演示素材：</strong>项目总览、PiperX 插入、SO-101 叠衣和收纳视频；注明播放倍速、策略版本与人工干预。</li><li><strong>缺失实验：</strong>4 h / 8 h 的 SFT + Int.，PiperX SFT + RL、Evo-RL R2，SO-101 folding 的 Evo-RL 结果。</li><li><strong>论文口径：</strong>统一 top 30% / top 10% 的优势采样描述，以及 critic 训练数据、输入和方法图；核对数据集与代码的实际发布状态。</li><li><strong>引用与致谢：</strong>正式 BibTeX、经确认的致谢及资助信息。</li></ul></div></details>
+      </div>
+    </section>
+
+  </main>
+  <footer class="site-footer"><span class="wordmark">Evo<span>-RL</span>.</span><p>Iterative Robot Policy Improvement via Staged Closed-Loop Learning</p><p class="footer-note">Page structure inspired by <a href="https://gazevla.github.io/" target="_blank" rel="noopener">GazeVLA</a>. Figures and research content from the Evo-RL manuscript.</p></footer>
+</body>
+</html>
