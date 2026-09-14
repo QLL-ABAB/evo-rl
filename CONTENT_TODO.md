@@ -32,7 +32,7 @@
 - [ ] 迭代表：PiperX Evo-RL R2。
 - [ ] 任务表：SO-101 folding 的 Evo-RL。
 
-更新 `dist/index.html` 时，同时修改摘要表和折叠的逐单元明细表，再移除对应 Pending 标记。不要把 SR 写成整任务完成率。已有 SO-101 packing 两行干预次数与时长数据已填入。
+更新 `dist/index.html` 时，同时修改摘要表和折叠的逐单元明细表，再移除对应 Pending 标记。不要把 SR 写成整任务完成率。新版 SO-101 packing 结果表已被注释，因此网页不再展示旧版数值。收纳任务保留数据集示例与视频位置。
 
 ## 数据集与引用
 
@@ -43,14 +43,26 @@
 
 ## 需要先统一的论文内容
 
-1. **优势采样比例。** Method 中按 demonstration / autonomous 两类各取 top 30%；实验中写 50-action advantage、正优势且全局 top 10%、保留 20-action chunk。需要明确哪项是最终方法，是否属于不同实验设置。网页保留文字提示，不擅自采用任一比例。
-2. **Critic 的描述与图示。** Abstract 提到 stage-aware critic、质量及阶段监督；Method 给出 vision-only、时间与接管惩罚的分类价值模型，方法图仍有 observation + language / advantage-conditioned 等标识。需要统一真实输入、训练数据范围、监督和采样流程，再更新方法图。网页主体仅写 value-guided refinement。
-3. **资源发布状态。** Abstract 为未来发布，Introduction / Conclusion 有已经公开的表述，目录中未提供可验证的正式链接。网页统一显示 Coming soon。
-4. **数据集总览图中的模态。** 原图包含标为 schematic 的 depth 展示，而正文对 PiperX / SO-101 主要明确 RGB 和 state / action。发布数据卡时需区分真实记录字段与示意图字段；网页未额外承诺深度数据覆盖。
+1. **优势采样比例与训练混合。** Algorithm 1 和 Method 中按 demonstration / autonomous 两类各取 top 30%，再混合不参与排序的人工纠错；实验中写 50-action advantage、正优势且全局 top 10%、保留 20-action chunk，随后混合纠错和原始示范。需要明确最终设置或适用轮次，网页保留提示。
+2. **摘要结果占位。** Abstract 中 [X] / [Y] 尚未填写。网页改用已有的 PiperX 绝对指标，并明确 folding 的 Evo-RL 结果待补；未代填折叠提升幅度。
+3. **收纳任务的表格引用。** `tab:packing_intervention` 已被注释，正文仍描述三个任务并引用此表，而摘要写两个任务。网页的当前定量评估聚焦插入与叠衣；收纳仅作 RW-RL 示例。若恢复收纳评估，需要提供最终表。
+4. **资源发布状态。** Abstract 为未来发布，Introduction / Conclusion 仍有已经公开的表述；尚未提供正式资源链接，网页继续显示 Coming soon。
+5. **数据集总览图中的模态。** 总览原图包含标为 schematic 的 depth 展示，而正文对 PiperX / SO-101 主要明确 RGB 和 state / action。数据卡需区分实际记录字段与示意字段。
 
-## 已做的初版检查
+## 本次已同步（2026-09-14）
 
-- 使用论文原图，网页无伪造图像、视频或实验数字。
+- 摘要与学习循环同步新版叙述：针对当前失败收集纠错，按优势选择并复用经验片段。
+- 根据正文所引用的 PDF 更新方法图、数据统计图、任务序列图；新增价值估计与片段选择图。旧版 Abstract 的 stage-aware critic 描述已移除，新方法图已采用视觉价值模型，不再沿用该旧待办。
+- 新数据统计图展示前十大任务组，以及 22,715 episodes、111,555 subtasks、128,792 key stages。
+- PiperX SFT 的 SR 改为 22.73，U₂ attempts 改为 15；SFT + Int. 的 TP 改为 47.98。
+- 用户提供的 PiperX 两组实验图原样加入；六项指标另录入可展开的文字表，保留图上精度。
+- 明确区分 attempt success 与 full-task success；SFT + Int. 和 Evo-RL 的 full-task success 都是 50.0%。成功试次完成时间分别为 255.2 s、234.6 s，不包括失败试次。
+- 原始图保留置信区间，不推算缺少的原始试次数据或误差线端点。
+- 四处视频与全部未发布资源继续留空，待补充说明保留。
+
+## 基础检查
+
+- 使用论文 PDF 导出的图片与用户提供的实验图，所有数值可追溯到来源。
 - 待发布资源按钮禁用；视频位置跳转到明确的占位区。
 - 静态页面可离线打开，图像使用本地相对路径。
 - 正文桌面 / 手机布局；大表格可在自身容器内横向滚动。
