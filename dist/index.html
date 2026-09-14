@@ -23,7 +23,7 @@
     <section class="hero" id="top" aria-labelledby="paper-title">
       <p class="eyebrow">REAL-WORLD ROBOT LEARNING</p>
       <h1 id="paper-title"><span class="hero-brand">Evo-RL</span><span class="hero-title">Iterative Robot Policy Improvement<br class="desktop-break"> via Staged Closed-Loop Learning</span></h1>
-      <p class="hero-summary">Learn from demonstrations. Recover with human guidance.<br class="desktop-break"> Improve through autonomous experience.</p>
+      <p class="hero-summary">Turn execution feedback into better robot policies.<br class="desktop-break"> Learn from demonstrations, targeted corrections, and selected autonomous experience.</p>
       <div class="author-block"><p>Anonymous Authors</p><span class="pending-inline" lang="zh-CN">待补充：作者姓名、顺序、单位及个人主页</span></div>
       <div class="resource-links" aria-label="Project resources">
         <button class="resource-button" data-resource="paper" type="button" disabled>Paper <span>Coming soon</span></button>
@@ -37,15 +37,23 @@
     <div class="page-width">
       <figure class="teaser">
         <a href="assets/rwrl_overview.png" target="_blank" rel="noopener" aria-label="Open RW-RL overview at full resolution"><img src="assets/rwrl_overview.png" width="1967" height="800" alt="RW-RL dataset overview showing four robot embodiments, real-world interactions, multimodal records, and hierarchical annotations" fetchpriority="high"></a>
-        <figcaption><strong>TL;DR</strong> Evo-RL brings demonstrations, targeted human corrections, and selected autonomous experience into one iterative learning loop. RW-RL organizes the data that makes this loop possible.</figcaption>
+        <figcaption><strong>TL;DR</strong> After demonstration-based initialization, Evo-RL alternates targeted human corrections with advantage-guided fine-tuning. RW-RL captures the experience accumulated throughout this learning loop.</figcaption>
       </figure>
     </div>
     <section class="section abstract-section" id="abstract">
       <div class="reading-width"><p class="eyebrow">THE IDEA</p><h2>From task competence<br>to better execution.</h2>
-      <p>Vision-language-action models can perform diverse manipulation tasks, yet reliable real-world execution remains challenging. Evo-RL turns execution feedback into iterative policy improvement: demonstrations establish an initial policy, followed by alternating rounds of intervention-based refinement and advantage-guided fine-tuning.</p>
+      <p>Vision-language-action models can perform diverse manipulation tasks, yet reliable real-world execution remains challenging. Evo-RL is a real-world reinforcement learning method that turns execution feedback into iterative policy improvement. Demonstrations establish an initial policy, followed by alternating rounds of intervention-based refinement and advantage-guided fine-tuning.</p>
       <p>Human interventions concentrate limited supervision on the policy’s current weaknesses. Advantage estimates identify useful segments from demonstrations and autonomous rollouts, helping retain learned skills while focusing fine-tuning on efficient behavior without repeatedly training on the entire growing dataset. The accumulated experience forms RW-RL: over 1,000 hours of real-world interaction across four robot embodiments, with action-source metadata and semantic annotations.</p>
-      <p>The current evaluation focuses on precision insertion and deformable manipulation. On PiperX insertion, Evo-RL reaches an attempt success rate of <strong>88.24%</strong> and a throughput of <strong>60.61 units/h</strong>, compared with 22.73% and 12.00 units/h for demonstration-only fine-tuning. Evo-RL results for garment folding are pending.</p>
+      <p>Across precision insertion and deformable manipulation, two studies examine <a href="#human-data-efficiency">human-data efficiency under matched budgets</a> and <a href="#policy-improvement">policy improvement across the full learning cycle</a>. Available results are reported below; Evo-RL results for garment folding are pending. Code, model checkpoints, and RW-RL will be released.</p>
       <p class="editor-note" lang="zh-CN">内容依据当前论文草稿整理；未完成的实验和发布信息均保留占位。</p></div>
+      <div class="page-width introduction-summary">
+        <h3>Learning beyond demonstrations.</h3>
+        <p class="motivation-text">Deployment exposes policies to states that demonstrations rarely cover. More successful demonstrations can broaden coverage, while interventions supply corrective actions in the difficult states the current policy actually encounters. Once execution becomes reliable, selected autonomous experience supports further improvements in speed and quality.</p>
+        <div class="contribution-grid">
+          <article><p class="eyebrow">CONTRIBUTION 01 · EVO-RL</p><h3>A staged loop for policy improvement</h3><p>Evo-RL integrates established imitation and value-guided learning methods into one iterative workflow. Demonstrations establish competence, human corrections support recovery, and selected autonomous experience refines execution. Two studies evaluate human-data efficiency and improvement across the learning cycle.</p></article>
+          <article><p class="eyebrow">CONTRIBUTION 02 · RW-RL</p><h3>Experience with action-source context</h3><p>RW-RL unifies demonstrations, human-intervention data, and autonomous rollouts across four embodiments and over 1,000 hours of interaction. Synchronized trajectories retain action-source labels, intervention boundaries, episode outcomes, and hierarchical semantic annotations so that human and policy actions can be used appropriately.</p></article>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="dataset">
@@ -124,7 +132,7 @@
             </tbody></table></div>
           </div></details>
         </div>
-        <div class="result-block"><div class="subsection-heading"><h3>Task performance &amp; ablations</h3><span class="table-label">Manuscript Table II</span></div>
+        <div class="result-block" id="policy-improvement"><div class="subsection-heading"><h3>Task performance &amp; ablations</h3><span class="table-label">Manuscript Table II</span></div>
           <div class="table-scroll" role="region" aria-label="Task performance and ablation results" tabindex="0"><table><caption class="sr-only">Task performance and ablations from the current manuscript. Dashes indicate missing results.</caption><thead><tr><th scope="col">Task</th><th scope="col">Method</th><th scope="col" class="numeric">SR (%) ↑</th><th scope="col" class="numeric">TP (units/h) ↑</th></tr></thead><tbody>
             <tr><th scope="rowgroup" rowspan="5">PiperX insertion</th><td>SFT</td><td class="numeric">22.73</td><td class="numeric">12.00</td></tr>
             <tr><td>SFT + Int.</td><td class="numeric">78.72</td><td class="numeric">47.98</td></tr>
@@ -146,7 +154,7 @@
           </tbody></table></div></div></details>
           <p class="fill-note" lang="zh-CN">待补充：PiperX 的 SFT + RL 消融、Evo-RL 第二轮，以及 SO-101 folding 的 Evo-RL 结果（U₁–U₅、SR、TP）。</p>
         </div>
-        <div class="result-block"><div class="subsection-heading"><h3>Human-data efficiency</h3><span class="table-label">Manuscript Table I</span></div>
+        <div class="result-block" id="human-data-efficiency"><div class="subsection-heading"><h3>Human-data efficiency</h3><span class="table-label">Manuscript Table I</span></div>
           <p>Budget is total active human-control time across demonstrations and interventions. SFT + Int. allocates one hour of each budget to human-intervention data.</p>
           <div class="table-scroll" role="region" aria-label="Human-data efficiency results" tabindex="0"><table><caption class="sr-only">PiperX demonstration scaling and intervention effectiveness</caption><thead><tr><th scope="col">Human budget</th><th scope="col">Method</th><th scope="col" class="numeric">SR (%) ↑</th><th scope="col" class="numeric">TP (units/h) ↑</th></tr></thead><tbody>
             <tr><th scope="rowgroup" rowspan="2">2 hours</th><td>SFT</td><td class="numeric">0.00</td><td class="numeric">0.00</td></tr>

@@ -41,7 +41,7 @@ videos: {
 
 ## 内容来源与取舍
 
-- 标题、作者占位、摘要改写：`main.tex` 标题、Abstract、Introduction。
+- 标题、作者占位、摘要改写：`main.tex` 标题、Abstract、Introduction。首屏概述、研究动机与两项贡献重点对齐摘要和引言；两项研究分别链接到人类数据效率与完整学习循环的结果。
 - RW-RL 的 1,000+ 小时、4 种本体、9 类场景、30+ 任务模板：RW-RL Dataset 章节。
 - 三阶段方法：新版 Abstract、Algorithm 1、Method 及实验中的 Value Learning and Advantage-Guided Sampling。
 - 总览图沿用 `figures/rwrl_overview.png`；方法图、统计图、任务序列图依据正文实际引用的 PDF 重新导出；新增价值 / 优势片段选择图。不要直接复制目录中未同步更新的同名旧 PNG。详见下方图片来源表。
