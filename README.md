@@ -22,7 +22,8 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 | `dist/site.js` | 正式资源替换、视频加载、引用复制、导航高亮 |
 | `dist/assets/` | 论文现有图片副本及后续补充的视频 |
 | `CONTENT_TODO.md` | 逐项补充清单及论文口径问题 |
-| `.openai/hosting.json` | 当前 Sites 项目标识与静态目录 |
+| `.github/workflows/pages.yml` | 推送 `main` 后自动发布 `dist/` 到 GitHub Pages |
+| `.openai/hosting.json` | 此前 Sites 预览的历史配置，GitHub Pages 不使用 |
 
 只需把 `content.js` 中相应的 `null` 替换为正式值，资源按钮、视频播放器和 BibTeX 复制功能就会启用。不要把 Token、密码或私有下载凭据写进前端代码。
 
@@ -51,7 +52,34 @@ videos: {
 
 ## 发布与后续维护
 
-`dist/` 是完整静态站点，可以作为静态托管服务的发布目录，也可后续放到 GitHub Pages 的发布分支或流水线输出目录。网站与 Overleaf 论文目录相互独立，不需要把网站代码推送到 Overleaf。
+当前目标仓库为 `QLL-ABAB/evo-rl`，GitHub Pages 默认地址为 `https://qll-abab.github.io/evo-rl/`。是否已发布以仓库 Actions 的成功部署记录和实际访问结果为准。
+
+`dist/` 是完整静态站点，发布工作流只上传这个目录，不把维护文档和历史 Sites 配置作为网页内容发布。网站与 Overleaf 论文目录相互独立，不需要把网站代码推送到 Overleaf。
+
+首次在 GitHub 仓库的 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。之后每次推送 `main`，工作流会自动发布；也可以在 **Actions → Deploy Evo-RL to GitHub Pages → Run workflow** 手动重跑。无需配置个人 Token 为仓库 Secret，工作流使用 GitHub 提供的短期 `GITHUB_TOKEN`。
+
+本地修改、检查后提交并推送：
+
+```bash
+git add dist .github README.md CONTENT_TODO.md
+git commit -m "Update Evo-RL project website"
+git push origin main
+```
+
+## 后续交接给一作
+
+可以将 `evo-rl` 仓库整体转移给一作的 GitHub 账号或团队组织，网站源码和发布工作流随仓库转移。当前页面使用相对资源路径，未写死 `QLL-ABAB` 或仓库名称，因此网页资源无需因为更换所有者而修改。
+
+转移后核对以下事项：
+
+1. 在接收方仓库中检查 Actions 是否启用，以及 Settings → Pages 是否仍选择 GitHub Actions。
+2. 确认 `github-pages` 环境允许 `main` 部署，并重新运行发布工作流。
+3. 从部署结果获取新网站地址，通常为 `https://新账号.github.io/evo-rl/`。GitHub 仓库地址的重定向不意味着旧 Pages 网站会自动重定向。
+4. 把本地 Git 的 `origin` 改成新仓库地址，并更新论文、README 和其他对外链接。
+
+如果之后使用专门的项目组织和与组织名匹配的 `组织名.github.io` 仓库，可以改为不带 `/evo-rl/` 路径的项目独立首页。
+
+## 草稿状态
 
 初版使用 `noindex, nofollow`，防止未完成内容被主动索引。正式公开前核对清单，并移除 `dist/index.html` 中该 robots meta 标签。该标签并不提供访问控制；访问权限由托管服务控制。
 
