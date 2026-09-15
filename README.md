@@ -1,6 +1,6 @@
 # Evo-RL 项目网站
 
-根据 `../Evo_RL/main.tex` 当前草稿搭建的英文项目页，参考 GazeVLA 的学术项目页信息结构，采用白底、深青色标题和分区长页布局。科研图片来自当前论文及用户补充的 PiperX 实验结果图，未复制参考站的图片、视频、文字或代码。最近同步日期：2026-09-14。
+根据 `../Evo_RL/main.tex` 当前草稿搭建的英文项目页，参考 GazeVLA 的学术项目页信息结构，采用白底、深青色标题和分区长页布局。科研图片来自当前论文及用户补充的 PiperX 实验结果图，未复制参考站的图片、视频、文字或代码。最近同步日期：2026-09-15。页面按方法概览、摘要与动机、学习循环、完整实验、演示视频、RW-RL 补充内容排列。
 
 ## 本地查看
 
@@ -20,7 +20,9 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 | `dist/styles.css` | 页面主题、排版、手机适配 |
 | `dist/content.js` | 论文、代码、数据集、模型链接；4 个视频地址；BibTeX |
 | `dist/site.js` | 正式资源替换、视频加载、引用复制、导航高亮 |
-| `dist/assets/` | 论文 PDF 导出的图片、原始结果图及后续补充的视频 |
+| `dist/assets/` | 论文 PDF 导出的图片、最新对比图、原始结果图及后续补充的视频 |
+| `data/results.json` | 最新论文两张主表的数值、逐单元计数及来源哈希 |
+| `scripts/render_policy_results.py` | 用上述数据生成静态结果图（制图需 matplotlib） |
 | `CONTENT_TODO.md` | 逐项补充清单及论文口径问题 |
 | `.github/workflows/pages.yml` | 推送 `main` 后自动发布 `dist/` 到 GitHub Pages |
 | `.openai/hosting.json` | 此前 Sites 预览的历史配置，GitHub Pages 不使用 |
@@ -39,30 +41,37 @@ videos: {
 
 视频请使用直接可播放的 MP4 / WebM 文件；不要把 YouTube 等播放页 URL 当作视频文件。正文中对应的待补充说明需在内容确认后同步移除。
 
-## 内容来源与取舍
+## 内容来源与页面重点
 
-- 标题、作者占位、摘要改写：`main.tex` 标题、Abstract、Introduction。首屏概述、研究动机与两项贡献重点对齐摘要和引言；两项研究分别链接到人类数据效率与完整学习循环的结果。
-- RW-RL 的 1,000+ 小时、4 种本体、9 类场景、30+ 任务模板：RW-RL Dataset 章节。
-- 三阶段方法：新版 Abstract、Algorithm 1、Method 及实验中的 Value Learning and Advantage-Guided Sampling。
-- 总览图沿用 `figures/rwrl_overview.png`；方法图、统计图、任务序列图依据正文实际引用的 PDF 重新导出；新增价值 / 优势片段选择图。不要直接复制目录中未同步更新的同名旧 PNG。详见下方图片来源表。
-- 主结果表保留 `tab:scale_intervention`（Table I）与 `tab:complete_loop`（Table II）的数值及缺项。新版 `tab:packing_intervention` 已注释，网页移除旧数据；收纳仍保留为数据集演示及视频占位。
-- SR 按成功 attempts / 总 attempts 定义，TP 为成功 units / 机器人执行小时；折叠任务中的 unit 是阶段，插入任务中的 unit 是 screw–sleeve pair。
-- 论文的发布状态表述不一致，页面统一保留资源待发布状态，直到提供正式链接。
-- 补充的 PiperX 结果图以原文件保留，六项指标另有可展开的文字表：图表数值沿用图中精度，论文表沿用两位小数。整任务成功率与 attempt success 分开说明；完成时间只统计成功试次，缺项和无成功试次均不写成零。
-- 论文中仍待确认的采样比例、训练混合方式和表格引用见 `CONTENT_TODO.md`；本次没有修改论文。
+- 摘要和动机重点对齐最新 Abstract / Introduction：困难状态的针对性纠错，以及不断增长经验中的选择性复用。首屏展示方法图、两项首轮提升与第二轮结果。
+- 方法按 Algorithm 1：初始化一次，后续交替两类更新。优势采样说明采用实验中的 50-action / top 10% / 20-action 设置，删除已过时的 top 30% 待办。
+- `tab:complete_loop`（Table II）和 `tab:scale_intervention`（Table I）均已补齐最新数值，结果区前置。新增值包括论文标红的修订内容，仍保留草稿状态。
+- SR 是成功 attempts / 全部 attempts。网页 TP 使用插入 units/h 和叠衣 stages/h，与数据效率分析和论文审计脚本一致；待统一的正文措辞见 `CONTENT_TODO.md`。
+- 用户 9 月 14 日提供的 PiperX 六项指标图不改动，放在补充实验中；原图不含最新所有条件，不用它替代主表。完成时间仅统计成功试次。
+- RW-RL 压缩到页面末尾；总览、标注图、任务序列、收纳视频在默认关闭的原生 details 内。两项评估任务的视频和项目总览保留在主页面。
+- 资源链接、四个视频、作者和 BibTeX 未提供时继续占位。论文源码未修改。
 
-## 图片来源
+## 图片来源与复现
 
-| 网页文件（`dist/assets/`） | 来源 | 处理 |
-| --- | --- | --- |
-| `rwrl_overview.png` | `../Evo_RL/figures/rwrl_overview.png` | 原样复制 |
-| `evo_rl_method.png` | `../Evo_RL/figures/evo_rl_method.pdf` | PDF 单页导出，宽 2400 px |
-| `data_characterization.png` | `../Evo_RL/figures/data_characterization.pdf` | PDF 单页导出，宽 2400 px |
-| `task_progression.png` | `../Evo_RL/figures/task_progression.pdf` | PDF 单页导出，宽 2400 px |
-| `value_advantage_500x200.png` | `../Evo_RL/figures/value_advantage_500x200.pdf` | PDF 单页导出，宽 2400 px |
-| `piperx_experimental_results.png` | 用户于 2026-09-14 提供的两组 PiperX 实验图 | 原样保存 998 × 1004 px，保留误差线 |
+正文引用的 PDF 为图片更新依据；目录里的同名 PNG 可能未同步。
 
-所有图都可点击查看完整分辨率。结果图下方的折叠表提供可选取的六项指标数据；未根据图片估算置信区间端点或重建原始试次数据。
+| 网页文件（`dist/assets/`） | 来源 |
+| --- | --- |
+| `evo_rl_method.png` | `../Evo_RL/figures/evo_rl_method.pdf` |
+| `rwrl_overview.png` | `../Evo_RL/figures/rwrl_overview.pdf` |
+| `data_characterization.png` | `../Evo_RL/figures/data_characterization.pdf` |
+| `task_progression.png` | `../Evo_RL/figures/task_progression.pdf` |
+| `value_advantage_500x200.png` | `../Evo_RL/figures/value_advantage_500x200.pdf` |
+| `policy_results.svg` / `.png` | 最新稿 Table II，快照保存在 `data/results.json` |
+| `piperx_experimental_results.png` | 用户于 2026-09-14 提供的实验图，原样保存 998 × 1004 px |
+
+论文 PDF 使用 `pdftoppm -singlefile -png -scale-to 2400` 导出。最新比较图使用 matplotlib：
+
+```bash
+python3 scripts/render_policy_results.py
+```
+
+网站运行本身不需要 Python 或 matplotlib；生成的静态图片已随仓库提交。之后更新论文数值时，应同步 JSON、网页主表与逐单元表，并重新生成比较图。新图只展示已报告点估计，未从旧误差条推算新条件的置信区间。
 
 ## 发布与后续维护
 

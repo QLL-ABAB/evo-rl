@@ -1,0 +1,472 @@
+{
+  "updated": "2026-09-15",
+  "source": "../Evo_RL/main.tex",
+  "source_sha256": "bd659d1aed7d694d8ed584f4a6a51af60c4540ea8174a73c50626f9c22d09a2f",
+  "status": "Current manuscript draft; includes values marked red in the source.",
+  "policy": [
+    {
+      "group": "SO-101 folding",
+      "method": "SFT",
+      "units": [
+        {
+          "successes": 20,
+          "planned": 20,
+          "attempts": 20
+        },
+        {
+          "successes": 17,
+          "planned": 20,
+          "attempts": 76
+        },
+        {
+          "successes": 16,
+          "planned": 20,
+          "attempts": 18
+        },
+        {
+          "successes": 16,
+          "planned": 20,
+          "attempts": 21
+        },
+        {
+          "successes": 16,
+          "planned": 20,
+          "attempts": 18
+        }
+      ],
+      "sr": "55.56",
+      "tp": "75.78"
+    },
+    {
+      "group": "SO-101 folding",
+      "method": "Evo-RL",
+      "units": [
+        {
+          "successes": 20,
+          "planned": 20,
+          "attempts": 20
+        },
+        {
+          "successes": 19,
+          "planned": 20,
+          "attempts": 36
+        },
+        {
+          "successes": 18,
+          "planned": 20,
+          "attempts": 22
+        },
+        {
+          "successes": 18,
+          "planned": 20,
+          "attempts": 22
+        },
+        {
+          "successes": 17,
+          "planned": 20,
+          "attempts": 20
+        }
+      ],
+      "sr": "76.67",
+      "tp": "90.00"
+    },
+    {
+      "group": "PiperX insertion",
+      "method": "SFT",
+      "units": [
+        {
+          "successes": 7,
+          "planned": 10,
+          "attempts": 20
+        },
+        {
+          "successes": 3,
+          "planned": 10,
+          "attempts": 15
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 9
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 0
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 0
+        }
+      ],
+      "sr": "22.73",
+      "tp": "12.00"
+    },
+    {
+      "group": "PiperX insertion",
+      "method": "SFT + Int.",
+      "units": [
+        {
+          "successes": 9,
+          "planned": 10,
+          "attempts": 11
+        },
+        {
+          "successes": 9,
+          "planned": 10,
+          "attempts": 12
+        },
+        {
+          "successes": 8,
+          "planned": 10,
+          "attempts": 10
+        },
+        {
+          "successes": 6,
+          "planned": 10,
+          "attempts": 8
+        },
+        {
+          "successes": 5,
+          "planned": 10,
+          "attempts": 6
+        }
+      ],
+      "sr": "78.72",
+      "tp": "47.98"
+    },
+    {
+      "group": "PiperX insertion",
+      "method": "SFT + RL",
+      "units": [
+        {
+          "successes": 8,
+          "planned": 10,
+          "attempts": 17
+        },
+        {
+          "successes": 5,
+          "planned": 10,
+          "attempts": 12
+        },
+        {
+          "successes": 3,
+          "planned": 10,
+          "attempts": 8
+        },
+        {
+          "successes": 1,
+          "planned": 10,
+          "attempts": 4
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 1
+        }
+      ],
+      "sr": "40.48",
+      "tp": "20.40"
+    },
+    {
+      "group": "PiperX insertion",
+      "method": "Evo-RL",
+      "units": [
+        {
+          "successes": 10,
+          "planned": 10,
+          "attempts": 10
+        },
+        {
+          "successes": 10,
+          "planned": 10,
+          "attempts": 10
+        },
+        {
+          "successes": 10,
+          "planned": 10,
+          "attempts": 12
+        },
+        {
+          "successes": 10,
+          "planned": 10,
+          "attempts": 11
+        },
+        {
+          "successes": 5,
+          "planned": 10,
+          "attempts": 8
+        }
+      ],
+      "sr": "88.24",
+      "tp": "60.61"
+    },
+    {
+      "group": "PiperX insertion",
+      "method": "Evo-RL (R2)",
+      "units": [
+        {
+          "successes": 10,
+          "planned": 10,
+          "attempts": 10
+        },
+        {
+          "successes": 10,
+          "planned": 10,
+          "attempts": 10
+        },
+        {
+          "successes": 10,
+          "planned": 10,
+          "attempts": 11
+        },
+        {
+          "successes": 9,
+          "planned": 10,
+          "attempts": 10
+        },
+        {
+          "successes": 8,
+          "planned": 10,
+          "attempts": 10
+        }
+      ],
+      "sr": "92.16",
+      "tp": "67.14"
+    }
+  ],
+  "budget": [
+    {
+      "group": "2 h",
+      "method": "SFT",
+      "units": [
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 18
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 0
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 0
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 0
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 0
+        }
+      ],
+      "sr": "0.00",
+      "tp": "0.00"
+    },
+    {
+      "group": "2 h",
+      "method": "SFT + Int.",
+      "units": [
+        {
+          "successes": 5,
+          "planned": 10,
+          "attempts": 12
+        },
+        {
+          "successes": 1,
+          "planned": 10,
+          "attempts": 1
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 0
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 0
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 0
+        }
+      ],
+      "sr": "46.15",
+      "tp": "7.20"
+    },
+    {
+      "group": "4 h",
+      "method": "SFT",
+      "units": [
+        {
+          "successes": 5,
+          "planned": 10,
+          "attempts": 23
+        },
+        {
+          "successes": 4,
+          "planned": 10,
+          "attempts": 7
+        },
+        {
+          "successes": 1,
+          "planned": 10,
+          "attempts": 7
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 0
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 0
+        }
+      ],
+      "sr": "27.03",
+      "tp": "12.00"
+    },
+    {
+      "group": "4 h",
+      "method": "SFT + Int.",
+      "units": [
+        {
+          "successes": 7,
+          "planned": 10,
+          "attempts": 13
+        },
+        {
+          "successes": 5,
+          "planned": 10,
+          "attempts": 14
+        },
+        {
+          "successes": 3,
+          "planned": 10,
+          "attempts": 3
+        },
+        {
+          "successes": 2,
+          "planned": 10,
+          "attempts": 2
+        },
+        {
+          "successes": 0,
+          "planned": 10,
+          "attempts": 1
+        }
+      ],
+      "sr": "51.52",
+      "tp": "20.40"
+    },
+    {
+      "group": "8 h",
+      "method": "SFT",
+      "units": [
+        {
+          "successes": 9,
+          "planned": 10,
+          "attempts": 21
+        },
+        {
+          "successes": 9,
+          "planned": 10,
+          "attempts": 14
+        },
+        {
+          "successes": 8,
+          "planned": 10,
+          "attempts": 23
+        },
+        {
+          "successes": 8,
+          "planned": 10,
+          "attempts": 19
+        },
+        {
+          "successes": 4,
+          "planned": 10,
+          "attempts": 10
+        }
+      ],
+      "sr": "43.68",
+      "tp": "50.17"
+    },
+    {
+      "group": "8 h",
+      "method": "SFT + Int.",
+      "units": [
+        {
+          "successes": 9,
+          "planned": 10,
+          "attempts": 11
+        },
+        {
+          "successes": 9,
+          "planned": 10,
+          "attempts": 11
+        },
+        {
+          "successes": 8,
+          "planned": 10,
+          "attempts": 10
+        },
+        {
+          "successes": 7,
+          "planned": 10,
+          "attempts": 9
+        },
+        {
+          "successes": 5,
+          "planned": 10,
+          "attempts": 6
+        }
+      ],
+      "sr": "80.85",
+      "tp": "50.67"
+    },
+    {
+      "group": "16 h",
+      "method": "SFT",
+      "units": [
+        {
+          "successes": 9,
+          "planned": 10,
+          "attempts": 12
+        },
+        {
+          "successes": 8,
+          "planned": 10,
+          "attempts": 9
+        },
+        {
+          "successes": 8,
+          "planned": 10,
+          "attempts": 8
+        },
+        {
+          "successes": 6,
+          "planned": 10,
+          "attempts": 12
+        },
+        {
+          "successes": 5,
+          "planned": 10,
+          "attempts": 5
+        }
+      ],
+      "sr": "78.26",
+      "tp": "53.27"
+    }
+  ]
+}
