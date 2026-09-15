@@ -1,6 +1,6 @@
 # Evo-RL 项目网站
 
-根据 `../Evo_RL/main.tex` 当前草稿搭建的英文项目页，参考 GazeVLA 的学术项目页信息结构，采用白底、深青色标题和分区长页布局。科研图片来自当前论文及用户补充的 PiperX 实验结果图，未复制参考站的图片、视频、文字或代码。最近同步日期：2026-09-15。页面按方法概览、摘要与动机、学习循环、完整实验、演示视频、RW-RL 补充内容排列。
+根据 `../Evo_RL/main.tex` 当前草稿搭建的英文项目页，参考 ObjectRelator 与 Sa2VA 的学术项目页结构，采用白底、居中论文标题、紧凑资源入口与图文单栏布局。科研图片来自当前论文及用户补充的 PiperX 实验结果图，未复制参考站的图片、视频、文字或代码。最近同步日期：2026-09-15。页面按 Short Summary、Framework Overview、Main Results、Demos、RW-RL、BibTeX 排列。方法和结果为主，完整明细可展开查看。
 
 ## 本地查看
 
@@ -19,7 +19,7 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 | `dist/index.html` | 标题、作者、摘要、章节、实验表格、占位说明 |
 | `dist/styles.css` | 页面主题、排版、手机适配 |
 | `dist/content.js` | 论文、代码、数据集、模型链接；4 个视频地址；BibTeX |
-| `dist/site.js` | 正式资源替换、视频加载、引用复制、导航高亮 |
+| `dist/site.js` | 正式资源替换、视频加载、引用复制 |
 | `dist/assets/` | 论文 PDF 导出的图片、最新对比图、原始结果图及后续补充的视频 |
 | `data/results.json` | 最新论文两张主表的数值、逐单元计数及来源哈希 |
 | `scripts/render_policy_results.py` | 用上述数据生成静态结果图（制图需 matplotlib） |
@@ -43,13 +43,19 @@ videos: {
 
 ## 内容来源与页面重点
 
-- 摘要和动机重点对齐最新 Abstract / Introduction：困难状态的针对性纠错，以及不断增长经验中的选择性复用。首屏展示方法图、两项首轮提升与第二轮结果。
+- 摘要和动机重点对齐最新 Abstract / Introduction：困难状态的针对性纠错，以及不断增长经验中的选择性复用。摘要集中陈述两项首轮提升与第二轮结果；去掉重复指标卡、营销式副标题和分区编号。
 - 方法按 Algorithm 1：初始化一次，后续交替两类更新。优势采样说明采用实验中的 50-action / top 10% / 20-action 设置，删除已过时的 top 30% 待办。
-- `tab:complete_loop`（Table II）和 `tab:scale_intervention`（Table I）均已补齐最新数值，结果区前置。新增值包括论文标红的修订内容，仍保留草稿状态。
+- `tab:complete_loop`（Table II）和 `tab:scale_intervention`（Table I）均已补齐最新数值，主结果图常显；完整策略表、预算表、逐单元计数与补充图按主题折叠。新增值包括论文标红的修订内容，仍保留草稿状态。
 - SR 是成功 attempts / 全部 attempts。网页 TP 使用插入 units/h 和叠衣 stages/h，与数据效率分析和论文审计脚本一致；待统一的正文措辞见 `CONTENT_TODO.md`。
 - 用户 9 月 14 日提供的 PiperX 六项指标图不改动，放在补充实验中；原图不含最新所有条件，不用它替代主表。完成时间仅统计成功试次。
-- RW-RL 压缩到页面末尾；总览、标注图、任务序列、收纳视频在默认关闭的原生 details 内。两项评估任务的视频和项目总览保留在主页面。
+- RW-RL 压缩到页面末尾；总览、标注图、任务序列、收纳视频在默认关闭的原生 details 内。两项评估任务的视频占位常显；项目总览视频单独折叠。
 - 资源链接、四个视频、作者和 BibTeX 未提供时继续占位。论文源码未修改。
+
+## 排版参考
+
+- [ObjectRelator](https://yuqianfu.com/ObjectRelator/)：居中论文标题、资源入口、简短概述与框架 / 结果分节。
+- [Sa2VA](https://lxtgh.github.io/project/sa2va/)：白底单栏、图示为主、简短图注。
+- 网页采用独立编写的 HTML / CSS；未复制参考站的研究内容、图片、代码或署名。数据集和未完成资源继续保留简短占位。
 
 ## 图片来源与复现
 

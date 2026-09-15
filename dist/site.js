@@ -69,21 +69,3 @@ if (typeof content.bibtex === 'string' && content.bibtex.trim()) {
     }
   });
 }
-
-if ('IntersectionObserver' in window) {
-  const navLinks = [...document.querySelectorAll('.site-header nav a')];
-  const observer = new IntersectionObserver((entries) => {
-    const entry = entries.find((item) => item.isIntersecting);
-    if (!entry) return;
-    navLinks.forEach((link) => {
-      const active = link.hash === '#' + entry.target.id;
-      link.classList.toggle('active', active);
-      if (active) link.setAttribute('aria-current', 'location');
-      else link.removeAttribute('aria-current');
-    });
-  }, { rootMargin: '-15% 0px -65% 0px' });
-  navLinks.forEach((link) => {
-    const section = document.querySelector(link.hash);
-    if (section) observer.observe(section);
-  });
-}
